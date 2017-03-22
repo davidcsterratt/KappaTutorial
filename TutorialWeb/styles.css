@@ -1,0 +1,182 @@
+p.big {line-height: 200%;}
+
+
+.error{color: red}
+
+.no_error{color: green}
+
+span.lineNo{color: blue;}
+
+span.subtopic{
+	font-size:120%;
+	color:rgb(18,108,155);
+}
+
+.faq {
+	color: rgb(18,108,155);
+	font-size:120% ;
+	}
+
+/* Basic font for all body*/
+body {
+	 font-family: Arial, sans-serif;
+/*	 background-color: rgb(205,242,242);  */
+	 background-color: white; 
+	}
+	
+/* Page heading*/
+h1,h3 {
+	color: rgb(18,108,155);
+	background-color: lightgrey;
+	text-align: center;	
+}
+
+
+
+h2 {
+	color: rgb(18,108,155);
+	background-color: lightgrey;
+	text-align: left;	
+}
+
+
+/*Unordered list*/
+ul {
+	list-style-type:disc;
+	line-height: 150%;
+}
+
+
+
+
+table {
+	 border-collapse:collapse;
+	 border: 2px solid blue;
+	 margin-top: 25px;
+     }
+     
+table.sedml {
+	 border-collapse:collapse;
+	 border: 1px solid blue;
+     }
+tr.tblColTitle {
+       background-color: #9acd32;
+     }
+
+td {
+	border: 1px solid blue;
+    margin-bottom:0px;
+    padding: 3px;
+}
+
+ caption {
+   font-size: 90%;
+ }
+/* Formatting for list of  links in navigation bar*/
+ul.navBar {
+	list-style-type:none;
+	margin-left:0;
+	padding-left: 0;
+}
+/* Links in nav bar*/
+ul.navBar a {
+	 display: block;
+	 width: 8em;
+	 border-right: 2px solid black;
+	}
+/* Id for content <Div>*/
+#content {
+	   margin-left:170px;
+}
+
+.ui-widget-content{font-size:12px !important;}
+.ui-widget{font-size:12px !important;}
+#pluginAccordion  {
+	background-color: rgb(205,242,242); 
+}
+
+#content a{
+	   text-decoration:none;
+	   font-weight: bold;
+	   border-bottom: 2px  #A5E410;
+}
+
+img.figure {
+	margin-left:10px;
+	margin-bottom: 10px;
+	margin-right: 10px;
+	margin-top: 20px;
+	}
+	
+img.floated_figure {
+	float:right;
+	margin-left:10px;
+	margin-bottom: 10px;
+	margin-right: 10px;
+	margin-top: 20px;
+	}
+
+
+div.break {
+margin-top:24pt;
+	margin-bottom:24pt;
+}
+/* Id for navigation bar div*/
+#nav {
+	float: left;
+	width: 160px;
+	margin-top: 10px;
+}
+
+/* Id for navigation bar div*/
+#twitter {
+	float: right;
+	width: 250px;
+	margin-top: 10px;
+}
+
+
+
+ a {
+	  text-decoration:none;
+	  /* font-weight: bold;*/
+	   border-bottom: 2px  #A5E410;
+	   color: rgb(0,99,255);
+	}
+	
+	
+ #content a.anchor {
+    font-weight: normal;
+    font-color:teal;
+  }
+
+#footer {
+	 clear: both; /* clears floating elements*/
+	 font-style: italic;
+	 font-size: 80%;
+	 border-top: 2px solid black;
+	 width:100%;
+	 
+	}
+
+/* Indent standard text*/
+p.text{   
+        margin-left: 20px;
+        color: rgb(30,30,30);
+        line-height:1.4;
+      }
+      
+      p.caption{   
+      font-style: italic; 
+       font-size: 90%;
+        color: rgb(18,108,155);
+
+      };
+      
+.taskheader {color:teal; font-size:18pt; font-weight:bold;}
+
+/* wraps descriptive text*/
+.plaintext {font-size:12pt; font-weight:normal; font-family:sans-serif; line-height:150%;}
+
+
+

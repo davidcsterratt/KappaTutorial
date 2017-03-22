@@ -1,0 +1,13 @@
+# Simple binding example (the 'Hello World' of Kappa)
+
+%agent: A(s)
+%agent: B(s)
+
+'Create bond' A(s), B(s) -> A(s!1), B(s!1) @ 1
+'Break bond'  A(s!1), B(s!1) -> A(s), B(s) @ 200
+
+%init: 1000 A,B
+
+%obs: 'Monomer A' A(s)
+%obs: 'Dimer A-B' A(s!1), B(s!1)
+

@@ -1,0 +1,18 @@
+# KaSim installation test file
+# Modified from Binding equilibria by Russ Harmer
+# http://rulebase.org/models/binding-equilibria
+
+%agent: A(s)
+%agent: B(s)
+
+%var: 'BND' 0.00001
+%var: 'BRK' 0.1
+
+A(s), B(s) -> A(s!0), B(s!0) @ 'BND'
+A(s!0), B(s!0) -> A(s), B(s) @ 'BRK'
+
+%init: 1000 A,B
+
+%obs: 'A' A(s)
+%obs: 'AB' A(s!1), B(s!1)
+

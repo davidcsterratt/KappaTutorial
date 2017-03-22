@@ -1,0 +1,42 @@
+# Model of MAPK cascade
+# from Ultrasensitivity in the mitogen-activated protein kinase cascade.
+# Huang CY, Ferrell JE. 1996
+#
+# Model adapted from Kappa exercises by Russ Harmer
+# http://www.rulebase.org/models/mapk
+
+%agent: MAPKKK(e1,e2,pSite~u~p)
+%agent: E1(kkk,state~active~inactive)
+%agent: E2(kkk)
+
+%var: 'rescale' 1.0
+
+%var: 'BIND' 0.0001 / 'rescale'
+%var: 'BREAK' 0.1
+%var: 'MODIFY' 0.1
+
+%init: 1000 E1
+%init: 100 MAPKKK
+%init: 10 E2
+
+%obs: 'MAPKKKp' MAPKKK(pSite~p?)
+%obs: 'E1p' E1(state~active?)
+
+
+### MAPKKK ### 
+
+MAPKKK(e1,pSite~u), E1(kkk,state~active) \
+    -> MAPKKK(e1!1, pSite~u), E1(kkk!1,state~active) \
+    @ 'BIND' # binding of MAPKKK activator
+MAPKKK(e1!1,pSite~u), E1(kkk!1) -> MAPKKK(e1, pSite~u), E1(kkk) \
+    @ 'BREAK' # unbinding of MAPKKK activator
+MAPKKK(e1!1,pSite~u), E1(kkk!1) -> MAPKKK(e1, pSite~p), E1(kkk) \
+    @ 'MODIFY' # MAPKKK activation
+
+MAPKKK(e2,pSite~p), E2(kkk) -> MAPKKK(e2!1, pSite~p), E2(kkk!1) \
+    @ 'BIND' # binding of MAPKKK inactivator
+MAPKKK(e2!1,pSite~p), E2(kkk!1) -> MAPKKK(e2, pSite~p), E2(kkk) \
+    @ 'BREAK' # unbinding of MAPKKK inactivator
+MAPKKK(e2!1,pSite~p), E2(kkk!1) -> MAPKKK(e2, pSite~u), E2(kkk) \
+    @ 'MODIFY' # MAPKKK inactivation
+

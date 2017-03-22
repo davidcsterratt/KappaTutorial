@@ -1,0 +1,15 @@
+# Phosphorylation of a substrate by a kinase
+
+%agent: Substrate(s,serine~u~p)
+%agent: Kinase(s)
+
+'Kinase binding'   Substrate(s,serine~u), Kinase(s) \
+                   -> Substrate(s!1,serine~u), Kinase(s!1) @ 1
+'Kinase unbinding' Substrate(s!1), Kinase(s!1) \
+                   -> Substrate(s), Kinase(s) @ 200
+'Phosphorylation'  Substrate(s!1,serine~u), Kinase(s!1) \
+                   -> Substrate(s,serine~p), Kinase(s) @ 200
+
+%init: 1000 Substrate
+%init: 10 Kinase
+

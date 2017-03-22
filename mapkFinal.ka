@@ -1,0 +1,119 @@
+# Model of MAPK cascade
+# from Ultrasensitivity in the mitogen-activated protein kinase cascade. 
+# Huang CY, Ferrell JE. 1996
+#
+# Model adapted from Kappa exercises by Russ Harmer
+# http://www.rulebase.org/models/mapk
+
+
+%agent: MAPKKK(e1,e2,kk,pSite~u~p)
+%agent: MAPKK(k,pSite1~u~p,pSite2~u~p)
+%agent: MAPK(pSite1~u~p,pSite2~u~p)
+%agent: E1(kkk,state~active~inactive)
+%agent: E2(kkk)
+%agent: MAPKK-Pase(kk)
+%agent: MAPK-Pase(k)
+
+%var: 'rescale' 1.0
+
+%var: 'BIND' 0.0001 / 'rescale'
+%var: 'BREAK' 0.1
+%var: 'MODIFY' 0.1
+
+%init: 1000 E1
+%init: 100 MAPKKK
+%init: 500 MAPKK
+%init: 1000 MAPK
+%init: 10 E2
+%init: 50 MAPKK-Pase
+%init: 100 MAPK-Pase
+
+%obs: 'MAPKpp' MAPK(pSite1~p?,pSite2~p?)
+%obs: 'MAPKKpp' MAPKK(pSite1~p?,pSite2~p?)
+%obs: 'MAPKKKp' MAPKKK(pSite~p?)
+%obs: 'E1p' E1(state~active?)
+
+
+### MAPKKK ###
+
+MAPKKK(e1,pSite~u), E1(kkk,state~active) \
+    -> MAPKKK(e1!1, pSite~u), E1(kkk!1,state~active) \
+    @ 'BIND' # binding of MAPKKK activator
+MAPKKK(e1!1,pSite~u), E1(kkk!1) -> MAPKKK(e1, pSite~u), E1(kkk) \
+    @ 'BREAK' # unbinding of MAPKKK activator
+MAPKKK(e1!1,pSite~u), E1(kkk!1) -> MAPKKK(e1, pSite~p), E1(kkk) \
+    @ 'MODIFY' # MAPKKK activation
+
+MAPKKK(e2,pSite~p), E2(kkk) -> MAPKKK(e2!1, pSite~p), E2(kkk!1) \
+    @ 'BIND' # binding of MAPKKK inactivator
+MAPKKK(e2!1,pSite~p), E2(kkk!1) -> MAPKKK(e2, pSite~p), E2(kkk) \
+    @ 'BREAK' # unbinding of MAPKKK inactivator
+MAPKKK(e2!1,pSite~p), E2(kkk!1) -> MAPKKK(e2, pSite~u), E2(kkk) \
+    @ 'MODIFY' # MAPKKK inactivation
+
+### MAPKK ###
+
+MAPKK(pSite1~u), MAPKKK(pSite~p,kk) \
+    -> MAPKK(pSite1~u!1), MAPKKK(pSite~p, kk!1) \
+    @ 'BIND' # binding MAPKKK-P and MAPKK
+MAPKK(pSite1~u!1), MAPKKK(kk!1) -> MAPKK(pSite1~u), MAPKKK(kk) \
+    @ 'BREAK' # unbinding MAPKKK-P and MAPKK
+MAPKK(pSite1~u!1), MAPKKK(kk!1) -> MAPKK(pSite1~p), MAPKKK(kk) \
+    @ 'MODIFY' # phosphorylation of MAPKK
+
+MAPKK(pSite2~u), MAPKKK(pSite~p,kk) \
+    -> MAPKK(pSite2~u!1), MAPKKK(pSite~p, kk!1) \
+    @ 'BIND' # binding MAPKKK-P and MAPKK
+MAPKK(pSite2~u!1), MAPKKK(kk!1) -> MAPKK(pSite2~u), MAPKKK(kk) \
+    @ 'BREAK' # unbinding MAPKKK-P and MAPKK
+MAPKK(pSite2~u!1), MAPKKK(kk!1) -> MAPKK(pSite2~p), MAPKKK(kk) \
+    @ 'MODIFY' # phosphorylation of MAPKK
+
+MAPKK(pSite1~p), MAPKK-Pase(kk) -> MAPKK(pSite1~p!1), MAPKK-Pase(kk!1) \
+    @ 'BIND' # binding MAPKK-Pase and MAPKK-P/PP
+MAPKK(pSite1~p!1), MAPKK-Pase(kk!1) -> MAPKK(pSite1~p), MAPKK-Pase(kk) \
+    @ 'BREAK' # unbinding MAPKK-Pase and MAPKK-P/PP
+MAPKK(pSite1~p!1), MAPKK-Pase(kk!1) -> MAPKK(pSite1~u), MAPKK-Pase(kk) \
+    @ 'MODIFY' # dephosphorylation of MAPKK-P/PP
+
+MAPKK(pSite2~p), MAPKK-Pase(kk) -> MAPKK(pSite2~p!1), MAPKK-Pase(kk!1) \
+    @ 'BIND' # binding MAPKK-Pase and MAPKK-P/PP
+MAPKK(pSite2~p!1), MAPKK-Pase(kk!1) -> MAPKK(pSite2~p), MAPKK-Pase(kk) \
+    @ 'BREAK' # unbinding MAPKK-Pase and MAPKK-P/PP
+MAPKK(pSite2~p!1), MAPKK-Pase(kk!1) -> MAPKK(pSite2~u), MAPKK-Pase(kk) \
+    @ 'MODIFY' # dephosphorylation of MAPKK-P/PP
+
+### MAPK ###
+
+MAPK(pSite1~u), MAPKK(k,pSite1~p,pSite2~p) \
+    -> MAPK(pSite1~u!1), MAPKK(k!1,pSite1~p,pSite2~p) \
+    @ 'BIND' # binding MAPKK-PP and MAPK
+MAPK(pSite1~u!1), MAPKK(k!1) -> MAPK(pSite1~u), MAPKK(k) \
+    @ 'BREAK' # unbinding MAPKK-PP and MAPK
+MAPK(pSite1~u!1), MAPKK(k!1) -> MAPK(pSite1~p), MAPKK(k) \
+    @ 'MODIFY' # phosphorylation of MAPK
+
+MAPK(pSite2~u), MAPKK(k,pSite1~p,pSite2~p) \
+    -> MAPK(pSite2~u!1), MAPKK(k!1,pSite1~p,pSite2~p) \
+    @ 'BIND' # binding MAPKK-PP and MAPK
+MAPK(pSite2~u!1), MAPKK(k!1) -> MAPK(pSite2~u), MAPKK(k) \
+    @ 'BREAK' # unbinding MAPKK-PP and MAPK
+MAPK(pSite2~u!1), MAPKK(k!1) -> MAPK(pSite2~p), MAPKK(k) \
+    @ 'MODIFY' # phosphorylation of MAPK
+
+MAPK(pSite1~p), MAPK-Pase(k) -> MAPK(pSite1~p!1), MAPK-Pase(k!1) \
+    @ 'BIND' # binding MAPK-Pase and MAPK-P/PP
+MAPK(pSite1~p!1), MAPK-Pase(k!1) -> MAPK(pSite1~p), MAPK-Pase(k) \
+    @ 'BREAK' # unbinding MAPK-Pase and MAPK-P/PP
+MAPK(pSite1~p!1), MAPK-Pase(k!1) -> MAPK(pSite1~u), MAPK-Pase(k) \
+    @ 'MODIFY' # dephosphorylation of MAPK-P/PP
+
+MAPK(pSite2~p), MAPK-Pase(k) -> MAPK(pSite2~p!1), MAPK-Pase(k!1) \
+    @ 'BIND' # binding MAPK-Pase and MAPK-P/PP
+MAPK(pSite2~p!1), MAPK-Pase(k!1) -> MAPK(pSite2~p), MAPK-Pase(k) \
+    @ 'BREAK' # unbinding MAPK-Pase and MAPK-P/PP
+MAPK(pSite2~p!1), MAPK-Pase(k!1) -> MAPK(pSite2~u), MAPK-Pase(k) \
+    @ 'MODIFY' # dephosphorylation of MAPK-P/PP
+
+
+

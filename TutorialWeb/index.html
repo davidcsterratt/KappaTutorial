@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Rule based modelling with Kappa tutorial</title>
+<link rel="stylesheet" type="text/css" href="styles.css">
+<style type="text/css">
+a:link.link {
+	font-weight: bold;
+	color: rgb(0, 99, 255);
+}
+
+a:visited.link {
+	font-weight: bold;
+	color: rgb(0, 99, 255);
+}
+
+a:hover.link {
+	font-weight: bold;
+	color: #6495ED;
+}
+</style>
+</head>
+<body>
+
+
+	<h1>Rule based modelling with Kappa</h1>
+
+
+	<div id="content" class="ui-default ui-default-content">
+		<p>
+			Welcome intrepid volunteers to the download and resource page for the
+			<b>'Rule based modelling with Kappa'</b> tutorial.
+		</p>
+
+		<p>I've made available necessary downloads, presentations and
+			tutorial resources here so that you can access them well before the
+			course starts. Depending on your expertise and network connection,
+			please allow around 30mins to perform all the installations.</p>
+
+		<p>Kudos to Dr. Richard Adams at CSBE for providing the layout of
+			this page (which I swiped).</p>
+		<p>If you encounter any problems installing the software, please
+			get in touch with me at donal.stewart[at]ed.ac.uk and I'll endeavour
+			to help.</p>
+
+		<h4>Rule based modelling introduction</h4>
+		Two presentations about Kappa (from Prof. Vincent Danos):
+		<ul>
+			<li><a class="link"
+				href="http://csbe.inf.ed.ac.uk/formal-approaches/kappa/Kappa_class_Danos_intro.pdf">Introduction
+					to rule based modelling</a>
+			</li>
+			<li><a class="link"
+				href="http://csbe.inf.ed.ac.uk/formal-approaches/kappa/Kappa_class_Danos_basics.pdf">Introduction
+					to Kappa tutorial</a>
+			</li>
+		</ul>
+		<h4>Rule based modelling with Kappa tutorial: software
+			installation instructions</h4>
+		<p>Please follow the installation notes below to prepare for the
+			Kappa tutorial. Note that the KaSim Kappa simulator is a command line
+			tool, so some familiarity with using the command shell on your
+			computer would be good:</p>
+		<ol>
+			<li>Download the KaSim Kappa simulator v2.01
+				<ul>
+					<li><a class="link"
+						href="https://github.com/downloads/jkrivine/KaSim/KaSim_2.01_macOSX_10.6.8_intel">MacOSX
+							(10.6)</a></li>
+					<li><a class="link"
+						href="https://github.com/downloads/jkrivine/KaSim/KaSim_2.01_winxp.exe">Windows</a>
+					</li>
+					<li><a class="link"
+						href="https://github.com/downloads/jkrivine/KaSim/KaSim_2.01_linux_x86">Linux</a>
+					</li>
+				</ul> The manual for the KaSim simulator is available <a class="link"
+				href="https://github.com/downloads/jkrivine/KaSim/KaSim_manual.pdf">here</a>.
+			</li>
+
+			<li>Open up a command shell on your computer and navigate to
+				where KaSim was downloaded.</li>
+
+			<li>Check KaSim is running correctly by entering the command:<br>
+				<br> <code>./KaSim_2.01_linux_x86</code> (or the equivalent for
+				the version you downloaded).<br> <br> You should get the
+				following as a response:<br> <br> <code>
+					KaSim 2.01-110112: <br> Usage is KaSim -i input_file [-e
+					events | -t time] [-p points] [-o output_file]
+				</code><br> <br>
+			</li>
+
+			<li>Download and save the following Kappa model file (to the
+				same place you put KaSim): <a class="link"
+				href="http://csbe.inf.ed.ac.uk/formal-approaches/kappa/installTest.ka">installTest.ka</a>
+			</li>
+
+			<li>Test running the model by entering the command:<br> <br>
+				<code>./KaSim_2.01_linux_x86 -i installTest.ka -e 1000 -p
+					1000</code> (or the equivalent for the version you downloaded).<br> <br>
+				You should get something similar to the following as a response:<br>
+				<br> <code>
+					Parsing installTest.ka...<br> done<br> +Self seeding...<br>
+					+Initialized random number generator with seed 59585578<br> +
+					Compiling...<br> -agent signatures<br> -variable
+					declarations<br> -initial conditions<br> -rules<br>
+					-observables<br> -perturbations<br> Done<br> +
+					Analyzing non local patterns...<br> + Building initial
+					simulation state...<br> -Counting initial local patterns...<br>
+					Done<br> <br>
+					____________________________________________________________<br>
+					############################################################<br>
+					Simulation ended (eff.: 0.993049)
+				</code><br> <br> You should also have a new output file <code>data.out</code>.
+			</li>
+		</ol>
+		<p>Only two things left. An editor for the Kappa model files, and
+			a means of viewing the output of the KaSim simulations. For editing
+			the Kappa models, most users use their own preferred text editor
+			(emacs,notepad,etc.). For viewing the Kappa data output files, again
+			users use their own preferred graphing tool (gnuplot, matlab, excel,
+			etc.). For the purposes of this tutorial, there is a simple java
+			based data plotting tool available if you prefer. To install it:</p>
+		<ol>
+			<li>Download the Kappa <a class="link"
+				href="https://github.com/downloads/donal-s/SpatialKappa/PlotViewer-v1.1.2.jar">PlotViewer
+					v1.1.2</a> executable jar file.</li>
+			<li>Run the file as an executable jar using java. Double
+				clicking on the download usually works. Depending on your operating
+				system, you may need to set the downloaded file as executable.</li>
+			<li>You should see a graphing window appear. Installation
+				successful.</li>
+		</ol>
+	</div>
+</body>
+</html>
