@@ -1,4 +1,4 @@
-options(kasim="/home/sterratt/bin/KaSim")
+options(kasim="c:/users/my_user_name/Documents/KappaBin_master/KappaBin/bin/KaSim.exe")
 
 run.kasim <- function(files, l=1, p=0.01, u="time", cmd=getOption("kasim"),
                       outfile="data.csv") {
