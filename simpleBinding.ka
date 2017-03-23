@@ -6,8 +6,8 @@
 'Create bond' A(s), B(s) -> A(s!1), B(s!1) @ 1
 'Break bond'  A(s!1), B(s!1) -> A(s), B(s) @ 200
 
-%init: 1000 A(s)
-%init: 1000 B(s)
+%init: 1000 A()
+%init: 1000 B()
 
 %obs: 'Monomer A' |A(s)|
 %obs: 'Dimer A-B' |A(s!1), B(s!1)|
