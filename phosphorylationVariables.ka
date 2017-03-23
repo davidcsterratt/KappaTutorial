@@ -10,8 +10,8 @@
 'Phosphorylation'  Substrate(s!1,serine~u), Kinase(s!1) \
                    -> Substrate(s,serine~p), Kinase(s) @ 'phosp. rate'
 
-%init: 'initial substrate' Substrate
-%init: 'initial kinase' Kinase
+%init: 'initial substrate' Substrate()
+%init: 'initial kinase' Kinase()
 
 %var: 'bind rate' 1
 %var: 'unbind rate' 200
@@ -19,4 +19,4 @@
 %var: 'initial kinase' 10
 %var: 'initial substrate' 'initial kinase' * 100
 
-%var: 'bound substrate' Substrate(s!1), Kinase(s!1)
+%var: 'bound substrate' |Substrate(s!1), Kinase(s!1)|
