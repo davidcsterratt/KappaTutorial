@@ -1,9 +1,10 @@
-options(kasim="/disk/bonnington/sterratt/datastore/src/kappa/KaSim4/KaSim")
+options(kasim="/home/sterratt/bin/KaSim")
 
-run.kasim <- function(file, l=1, p=0.01, u="time", cmd=getOption("kasim"),
+run.kasim <- function(files, l=1, p=0.01, u="time", cmd=getOption("kasim"),
                       outfile="data.csv") {
   unlink(outfile, force=TRUE)
-  system(paste(cmd, "-i", file, "-l", l, "-p", p, "-u", u, "-o", outfile))
+  system(paste(cmd, paste("-i", files, collapse=" "),
+               "-l", l, "-p", p, "-u", u, "-o", outfile))
   return(read.kasim(outfile))
 }
 
